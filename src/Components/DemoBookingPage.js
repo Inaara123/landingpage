@@ -297,7 +297,7 @@ const DemoBookingPage = () => {
         </h2>
         <List>
           {[
-            'How to turn every minute patients wait into sales',
+            'How to turn every minute patients wait into potential revenue oppurtunity',
             'Which locations bring your highest-value patients',
             'What marketing channels actually work for your clinic',
             'Hidden revenue opportunities in your patient data'
