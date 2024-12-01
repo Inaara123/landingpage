@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
+import { FB_PIXEL } from './FacebookPixel';
+
 
 const Container = styled.div`
   max-width: 800px;
@@ -190,6 +192,13 @@ const DemoBookingPage = () => {
   });
 
   useEffect(() => {
+    FB_PIXEL.pageView();
+        
+    // Track booking page view
+    FB_PIXEL.track('ViewContent', {
+        content_name: 'Demo Booking Page',
+        content_category: 'Lead Form'
+    });
     collectMetadata();
   }, []);
 
@@ -226,31 +235,53 @@ const DemoBookingPage = () => {
     setStatus({ loading: true, error: null, success: false });
 
     try {
-      const { error } = await supabase
-        .from('demo_bookings')
-        .insert([{
-          name: formData.name,
-          phone: formData.phone,
-          clinic_name: formData.clinicName,
-          created_at: getISTTime(),
-          ...metadata
-        }]);
+        const { error } = await supabase
+            .from('demo_bookings')
+            .insert([{
+                name: formData.name,
+                phone: formData.phone,
+                clinic_name: formData.clinicName,
+                created_at: getISTTime(),
+                ...metadata
+            }]);
 
-      if (error) throw error;
+        if (error) throw error;
 
-      setStatus({ loading: false, error: null, success: true });
-      setShowPopup(true);
+        // Track successful form submission
+        FB_PIXEL.track('Lead', {
+            content_name: 'Demo Booking Success',
+            content_category: 'Lead Generation',
+            clinic_name: formData.clinicName,
+            status: 'success'
+        });
+
+        setStatus({ loading: false, error: null, success: true });
+        setShowPopup(true);
     } catch (error) {
-      setStatus({ loading: false, error: error.message, success: false });
-      alert('Error submitting form. Please try again.');
-    }
-  };
+        // Track form submission error
+        FB_PIXEL.track('Lead', {
+            content_name: 'Demo Booking Error',
+            content_category: 'Lead Generation',
+            status: 'error'
+        });
 
-  const handleClosePopup = () => {
+        setStatus({ loading: false, error: error.message, success: false });
+        alert('Error submitting form. Please try again.');
+    }
+};
+
+const handleClosePopup = () => {
+    // Track when user completes the registration flow
+    FB_PIXEL.track('CompleteRegistration', {
+        content_name: 'Demo Booking Complete',
+        status: 'success'
+    });
+
     setShowPopup(false);
     setFormData({ name: '', phone: '', clinicName: '' });
     navigate('/');
-  };
+};
+
 
   return (
     <Container>

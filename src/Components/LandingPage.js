@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import { ArrowRight, CheckCircle, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { FB_PIXEL } from './FacebookPixel';
 
 const NavBar = styled.nav`
   background-color: #2563eb;
@@ -144,10 +146,27 @@ const ListItem = styled.li`
 
 const LandingPage = () => {
     const navigate = useNavigate();
+    useEffect(() => {
+        // Track page view when component mounts
+        FB_PIXEL.pageView();
+        
+        // Track landing page view
+        FB_PIXEL.track('ViewContent', {
+            content_name: 'Clinic Landing Page',
+            content_category: 'Landing Page'
+        });
+    }, []);
 
-  const handleBookDemo = () => {
-    navigate('/book-demo');
-  };
+    const handleBookDemo = () => {
+        // Track demo button click
+        FB_PIXEL.track('InitiateCheckout', {
+            content_name: 'Demo Booking Button Click',
+            content_category: 'Lead Generation'
+        });
+        navigate('/book-demo');
+    };
+
+
 
   return (
     <Container>
