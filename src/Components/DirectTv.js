@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { ArrowRight, CheckCircle, Clock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { FB_PIXEL } from './FacebookPixel';
+
+// Import Montserrat font
+const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+`;
 
 // Styled Components
 const Container = styled.div`
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1rem;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', 'Montserrat', Helvetica, Arial, sans-serif;
   color: #1F2937;
 `;
 
@@ -20,15 +25,17 @@ const Header = styled.header`
 `;
 
 const MainHeadline = styled.h1`
-  font-size: 2.5rem;
-  font-weight: 800;
+  font-size: 3rem; /* Increased font size */
+  font-weight: 900; /* Increased font weight */
+  font-family: 'Montserrat', sans-serif; /* Distinctive font */
   color: #1F2937;
   margin-bottom: 1rem;
   line-height: 1.2;
 `;
 
 const SubHeadline = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.5rem; /* Increased font size */
+  font-weight: 600; /* Bold key phrases */
   color: #4B5563;
   margin-bottom: 2rem;
 `;
@@ -37,7 +44,12 @@ const OpeningHook = styled.p`
   font-size: 1.125rem;
   color: #4B5563;
   margin-bottom: 2rem;
-  line-height: 1.6;
+  line-height: 1.8; /* Adjusted line-height */
+  
+  strong {
+    font-weight: 700; /* Bold key phrases */
+    color: #1F2937; /* Different color for emphasis */
+  }
 `;
 
 const ImageWrapper = styled.div`
@@ -57,8 +69,9 @@ const Section = styled.section`
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.75rem;
-  font-weight: 700;
+  font-size: 2rem; /* Increased font size */
+  font-weight: 700; /* Consistent emphasis */
+  color: #2563EB; /* Color accent */
   margin-bottom: 1rem;
 `;
 
@@ -93,6 +106,18 @@ const SocialProof = styled.div`
   border-radius: 0.5rem;
   text-align: center;
   margin: 2rem 0;
+  
+  h2 {
+    color: #1F2937;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  li {
+    font-weight: 600; /* Emphasize key points */
+    color: #10B981;
+  }
 `;
 
 const GuaranteeBox = styled.div`
@@ -102,6 +127,20 @@ const GuaranteeBox = styled.div`
   padding: 1.5rem;
   margin: 2rem 0;
   text-align: center;
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.125rem;
+    color: #4B5563;
+    line-height: 1.6;
+    font-weight: 600; /* Emphasize guarantee */
+  }
 `;
 
 const UrgencyBox = styled.div`
@@ -111,6 +150,20 @@ const UrgencyBox = styled.div`
   padding: 1.5rem;
   margin: 2rem 0;
   text-align: center;
+  
+  h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #EF4444;
+    margin-bottom: 1rem;
+  }
+  
+  p {
+    font-size: 1.125rem;
+    color: #4B5563;
+    line-height: 1.6;
+    font-weight: 600; /* Emphasize urgency */
+  }
 `;
 
 const Form = styled.form`
@@ -129,7 +182,8 @@ const FormGroup = styled.div`
 const Label = styled.label`
   display: block;
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 600; /* Clear labeling */
+  font-size: 1rem; /* Increased font size */
   color: #374151;
 `;
 
@@ -140,12 +194,12 @@ const Input = styled.input`
   border-radius: 0.375rem;
   font-size: 1rem;
   transition: border-color 0.2s;
-
+  
   &:focus {
     outline: none;
     border-color: #2563EB;
   }
-
+  
   &:disabled {
     background: #F3F4F6;
   }
@@ -156,21 +210,21 @@ const SubmitButton = styled.button`
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
-  font-size: 1.125rem;
-  font-weight: 600;
+  font-size: 1.25rem; /* Prominent font size */
+  font-weight: 700; /* Bold typography */
   border: none;
   cursor: pointer;
   width: 100%;
   transition: background 0.2s;
-
+  
   display: flex;
   align-items: center;
   justify-content: center;
-
+  
   &:hover {
     background: #1D4ED8;
   }
-
+  
   &:disabled {
     opacity: 0.7;
     cursor: not-allowed;
@@ -204,8 +258,8 @@ const PopupContent = styled.div`
 
 const PopupTitle = styled.h2`
   color: #1F2937;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1.75rem; /* Increased font size */
+  font-weight: 700; /* Bold typography */
   margin-bottom: 1rem;
 `;
 
@@ -213,6 +267,7 @@ const PopupText = styled.p`
   color: #4B5563;
   margin-bottom: 1.5rem;
   line-height: 1.5;
+  font-size: 1.125rem; /* Increased font size */
 `;
 
 const CloseButton = styled.button`
@@ -221,10 +276,10 @@ const CloseButton = styled.button`
   padding: 0.75rem 1.5rem;
   border-radius: 0.375rem;
   border: none;
-  font-weight: 500;
+  font-weight: 600; /* Bold typography */
   cursor: pointer;
   transition: background 0.2s;
-
+  
   &:hover {
     background: #1D4ED8;
   }
@@ -339,148 +394,148 @@ const DirectTV = () => {
   };
 
   return (
-    <Container>
-      <Header>
-        <MainHeadline>
-          Imagine Never Losing Another 5-Star Review Over Wait Times…
-        </MainHeadline>
-        <SubHeadline>
-          Clinics with average wait times over 20 minutes see 37% fewer 5-star reviews. But you don’t have to be part of that statistic.
-        </SubHeadline>
-      </Header>
+    <>
+      <GlobalStyle />
+      <Container>
+        <Header>
+          <MainHeadline>
+            Imagine Never Losing Another 5-Star Review Over Wait Times…
+          </MainHeadline>
+          <SubHeadline>
+            Clinics with average wait times over 20 minutes see <strong>37% fewer 5-star reviews</strong>. But you don’t have to be part of that statistic.
+          </SubHeadline>
+        </Header>
 
-      <OpeningHook>
-        By now, you’ve probably noticed how long wait times can turn even your happiest patients into frustrated, dissatisfied ones. What if in less than 10 minutes , you could transform their experience—and your clinic’s reputation—for good?
-      </OpeningHook>
+        <OpeningHook>
+          By now, you’ve probably noticed how long wait times can turn even your happiest patients into frustrated, dissatisfied ones. What if in less than <strong>10 minutes</strong>, you could transform their experience—and your clinic’s reputation—for good?
+        </OpeningHook>
 
-      <ImageWrapper>
-        {/* Replace the src with the path to your desired image */}
-        <img src="/boverphoto.jpeg" alt="Serene Clinic Environment" />
-      </ImageWrapper>
+        <ImageWrapper>
+          {/* Replace the src with the path to your desired image */}
+          <img src="/boverphoto.jpeg" alt="Serene Clinic Environment" />
+        </ImageWrapper>
 
+        <Section>
+          <SectionTitle>Using Our Proven System:</SectionTitle>
+          <List>
+            <ListItem>
+              <CheckCircle color="#10B981" />
+              You’ll cut perceived wait times in half without adding staff.
+            </ListItem>
+            <ListItem>
+              <CheckCircle color="#10B981" />
+              Patients will feel prioritized and cared for.
+            </ListItem>
+            <ListItem>
+              <CheckCircle color="#10B981" />
+              Your clinic will be recognized as the leader in patient satisfaction.
+            </ListItem>
+          </List>
+        </Section>
 
+        <Section>
+          <SectionTitle>Success Visualization</SectionTitle>
+          <SectionText>
+            Picture a future where every patient leaves a glowing review, your clinic stands out as the top choice in the community, and you feel the pride of knowing you’ve mastered patient care.
+          </SectionText>
+        </Section>
 
-      <Section>
-        <SectionTitle>Using Our Proven System:</SectionTitle>
-        <List>
-          <ListItem>
-            <CheckCircle color="#10B981" />
-            You’ll cut perceived wait times in half without adding staff.
-          </ListItem>
-          <ListItem>
-            <CheckCircle color="#10B981" />
-            Patients will feel prioritized and cared for.
-          </ListItem>
-          <ListItem>
-            <CheckCircle color="#10B981" />
-            Your clinic will be recognized as a leader in patient satisfaction.
-          </ListItem>
-        </List>
-      </Section>
+        <SocialProof>
+          <SectionTitle>Clinics using NeoFlow Digital, report:</SectionTitle>
+          <List>
+            <ListItem>
+              <CheckCircle color="#10B981" />
+              <strong>A 50% boost in positive reviews</strong> within 30 days.
+            </ListItem>
+            <ListItem>
+              <CheckCircle color="#10B981" />
+              <strong>A dramatic improvement</strong> in patient retention and referrals.
+            </ListItem>
+          </List>
+        </SocialProof>
 
-      <Section>
-        <SectionTitle>Success Visualization</SectionTitle>
-        <SectionText>
-          Picture a future where every patient leaves a glowing review, your clinic stands out as the top choice in the community, and you feel the pride of knowing you’ve mastered patient care.
-        </SectionText>
-      </Section>
+        <GuaranteeBox>
+          <SectionTitle>Our Guarantee</SectionTitle>
+          <SectionText>
+            We guarantee measurable results within 30 days—or you pay nothing. You have nothing to lose and everything to gain.
+          </SectionText>
+        </GuaranteeBox>
 
-      <SocialProof>
-        <SectionTitle>Clinics using NeoFlow Digital, report:</SectionTitle>
-        <List>
-          <ListItem>
-            <CheckCircle color="#10B981" />
-            A 50% boost in positive reviews within 30 days.
-          </ListItem>
-          <ListItem>
-            <CheckCircle color="#10B981" />
-            A dramatic improvement in patient retention and referrals.
-          </ListItem>
-        </List>
-      </SocialProof>
+        <UrgencyBox>
+          <Clock size={24} style={{ marginBottom: '1rem' }} />
+          <SectionTitle>Limited Availability</SectionTitle>
+          <SectionText>
+            Only <strong>10 clinics</strong> in your area will be eligible for this solution at our discounted rate of <strong> Rs.41/day</strong>. Don’t wait—your competition won’t.
+          </SectionText>
+        </UrgencyBox>
 
-      <GuaranteeBox>
-        <SectionTitle>Our Guarantee</SectionTitle>
-        <SectionText>
-          We guarantee measurable results within 30 days—or you pay nothing. You have nothing to lose and everything to gain.
-        </SectionText>
-      </GuaranteeBox>
+        <Section>
+          <SectionTitle>Take Action Now</SectionTitle>
+          <SectionText>
+            Take the first step toward transforming your clinic’s reputation. Fill out the form below, and let’s make long wait times a thing of the past.
+          </SectionText>
+        </Section>
 
-      <UrgencyBox>
-        <Clock size={24} style={{ marginBottom: '1rem' }} />
-        <SectionTitle>Limited Availability</SectionTitle>
-        <SectionText>
-          Only 10 clinics in your area will be eligible for this solution at our discounted rate of 41/day. Don’t wait—your competition won’t.
-        </SectionText>
-      </UrgencyBox>
+        <Form onSubmit={handleSubmit}>
+          <FormGroup>
+            <Label htmlFor="name">Your Name</Label>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              required
+              disabled={status.loading}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="phone">Phone Number</Label>
+            <Input
+              type="tel"
+              id="phone"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+              disabled={status.loading}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Label htmlFor="clinicName">Clinic Name</Label>
+            <Input
+              type="text"
+              id="clinicName"
+              name="clinicName"
+              value={formData.clinicName}
+              onChange={handleChange}
+              required
+              disabled={status.loading}
+            />
+          </FormGroup>
+          <SubmitButton type="submit" disabled={status.loading}>
+            {status.loading ? 'Submitting...' : 'Transform My Clinic Now!'}
+            <ArrowRight style={{ marginLeft: '0.5rem' }} />
+          </SubmitButton>
+        </Form>
 
-      <Section>
-        <SectionTitle>Take Action Now</SectionTitle>
-        <SectionText>
-          Take the first step toward transforming your clinic’s reputation. Fill out the form below, and let’s make long wait times a thing of the past.
-        </SectionText>
-      </Section>
-
-      <Form onSubmit={handleSubmit}>
-        <FormGroup>
-          <Label htmlFor="name">Your Name</Label>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            disabled={status.loading}
-          />
-        </FormGroup>
-        <FormGroup>
-          <Label htmlFor="phone">Phone Number</Label>
-          <Input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-            disabled={status.loading}
-          />
-        </FormGroup>
- 
-        <FormGroup>
-          <Label htmlFor="clinicName">Clinic Name</Label>
-          <Input
-            type="text"
-            id="clinicName"
-            name="clinicName"
-            value={formData.clinicName}
-            onChange={handleChange}
-            required
-            disabled={status.loading}
-          />
-        </FormGroup>
-        <SubmitButton type="submit" disabled={status.loading}>
-          {status.loading ? 'Submitting...' : 'Transform My Clinic Now!'}
-          <ArrowRight style={{ marginLeft: '0.5rem' }} />
-        </SubmitButton>
-      </Form>
-
-      {showPopup && (
-        <PopupOverlay>
-          <PopupContent>
-            <PopupTitle>Thank You for Your Interest!</PopupTitle>
-            <PopupText>
-              We appreciate you taking the time to reach out. Our team will contact you within the next 24 hours at {formData.phone} or {formData.email} to schedule your personalized consultation.
-              <br /><br />
-              We look forward to helping you transform your clinic’s reputation.
-            </PopupText>
-            <CloseButton onClick={handleClosePopup}>
-              Close
-            </CloseButton>
-          </PopupContent>
-        </PopupOverlay>
-      )}
-    </Container>
+        {showPopup && (
+          <PopupOverlay>
+            <PopupContent>
+              <PopupTitle>Thank You for Your Interest!</PopupTitle>
+              <PopupText>
+                We appreciate you taking the time to reach out. Our team will contact you within the next 24 hours at {formData.phone} or {formData.email} to schedule your personalized consultation.
+                <br /><br />
+                We look forward to helping you transform your clinic’s reputation.
+              </PopupText>
+              <CloseButton onClick={handleClosePopup}>
+                Close
+              </CloseButton>
+            </PopupContent>
+          </PopupOverlay>
+        )}
+      </Container>
+    </>
   );
 };
 
