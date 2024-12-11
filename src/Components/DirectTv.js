@@ -8,6 +8,11 @@ import { FB_PIXEL } from './FacebookPixel';
 // Import Montserrat font
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+  
+  /* Ensure box-sizing is border-box for all elements */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 `;
 
 // Styled Components
@@ -17,11 +22,19 @@ const Container = styled.div`
   padding: 2rem 1rem;
   font-family: 'Helvetica Neue', 'Montserrat', Helvetica, Arial, sans-serif;
   color: #1F2937;
+
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
 `;
 
 const Header = styled.header`
   text-align: center;
   margin-bottom: 3rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
 `;
 
 const MainHeadline = styled.h1`
@@ -31,6 +44,10 @@ const MainHeadline = styled.h1`
   color: #1F2937;
   margin-bottom: 1rem;
   line-height: 1.2;
+
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
 `;
 
 const SubHeadline = styled.p`
@@ -38,6 +55,11 @@ const SubHeadline = styled.p`
   font-weight: 600; /* Bold key phrases */
   color: #4B5563;
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const OpeningHook = styled.p`
@@ -49,6 +71,11 @@ const OpeningHook = styled.p`
   strong {
     font-weight: 700; /* Bold key phrases */
     color: #1F2937; /* Different color for emphasis */
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
   }
 `;
 
@@ -62,10 +89,18 @@ const ImageWrapper = styled.div`
     border-radius: 0.5rem;
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const Section = styled.section`
   margin-bottom: 2rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1.5rem;
+  }
 `;
 
 const SectionTitle = styled.h2`
@@ -73,26 +108,49 @@ const SectionTitle = styled.h2`
   font-weight: 700; /* Consistent emphasis */
   color: #2563EB; /* Color accent */
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const SectionText = styled.p`
   font-size: 1.125rem;
   color: #4B5563;
   line-height: 1.6;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const List = styled.ul`
   list-style: none;
   padding: 0;
   margin: 1rem 0;
+
+  @media (max-width: 768px) {
+    margin: 0.75rem 0;
+  }
 `;
 
 const ListItem = styled.li`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.75rem;
   padding: 0.75rem 0;
   font-size: 1.125rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    padding: 0.5rem 0;
+  }
+
+  svg {
+    flex-shrink: 0;
+    margin-top: 0.25rem;
+  }
 `;
 
 const Highlight = styled.span`
@@ -104,14 +162,24 @@ const SocialProof = styled.div`
   background: #F3F4F6;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  text-align: center;
+  text-align: left; /* Changed from center to left for better alignment */
   margin: 2rem 0;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
   
   h2 {
     color: #1F2937;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
   }
   
   li {
@@ -128,11 +196,21 @@ const GuaranteeBox = styled.div`
   margin: 2rem 0;
   text-align: center;
   
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
   h2 {
     font-size: 2rem;
     font-weight: 700;
     color: #1F2937;
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
   }
   
   p {
@@ -140,6 +218,10 @@ const GuaranteeBox = styled.div`
     color: #4B5563;
     line-height: 1.6;
     font-weight: 600; /* Emphasize guarantee */
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -151,11 +233,21 @@ const UrgencyBox = styled.div`
   margin: 2rem 0;
   text-align: center;
   
+  @media (max-width: 768px) {
+    padding: 1rem;
+    margin: 1.5rem 0;
+  }
+
   h2 {
     font-size: 2rem;
     font-weight: 700;
     color: #EF4444;
     margin-bottom: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
   }
   
   p {
@@ -163,6 +255,10 @@ const UrgencyBox = styled.div`
     color: #4B5563;
     line-height: 1.6;
     font-weight: 600; /* Emphasize urgency */
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -173,10 +269,19 @@ const Form = styled.form`
   padding: 2rem;
   border-radius: 0.75rem;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    margin: 1.5rem auto;
+  }
 `;
 
 const FormGroup = styled.div`
   margin-bottom: 1.5rem;
+
+  @media (max-width: 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const Label = styled.label`
@@ -185,6 +290,10 @@ const Label = styled.label`
   font-weight: 600; /* Clear labeling */
   font-size: 1rem; /* Increased font size */
   color: #374151;
+
+  @media (max-width: 768px) {
+    font-size: 0.9rem;
+  }
 `;
 
 const Input = styled.input`
@@ -202,6 +311,11 @@ const Input = styled.input`
   
   &:disabled {
     background: #F3F4F6;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -229,6 +343,11 @@ const SubmitButton = styled.button`
     opacity: 0.7;
     cursor: not-allowed;
   }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+  }
 `;
 
 const PopupOverlay = styled.div`
@@ -254,6 +373,11 @@ const PopupContent = styled.div`
   position: relative;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 
               0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    width: 90%;
+  }
 `;
 
 const PopupTitle = styled.h2`
@@ -261,6 +385,11 @@ const PopupTitle = styled.h2`
   font-size: 1.75rem; /* Increased font size */
   font-weight: 700; /* Bold typography */
   margin-bottom: 1rem;
+
+  @media (max-width: 768px) {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
 `;
 
 const PopupText = styled.p`
@@ -268,6 +397,11 @@ const PopupText = styled.p`
   margin-bottom: 1.5rem;
   line-height: 1.5;
   font-size: 1.125rem; /* Increased font size */
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -282,6 +416,11 @@ const CloseButton = styled.button`
   
   &:hover {
     background: #1D4ED8;
+  }
+
+  @media (max-width: 768px) {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
 `;
 
@@ -346,14 +485,18 @@ const DirectTV = () => {
     setStatus({ loading: true, error: null, success: false });
 
     try {
-      const { error } = await supabase
-        .from('clinic_leads')
+      const { data, error } = await supabase
+        .from('demo_bookings') // Corrected table name
         .insert([{
           name: formData.name,
           phone: formData.phone,
           clinic_name: formData.clinicName,
           created_at: getISTTime(),
-          ...metadata
+          user_agent: metadata.user_agent,
+          screen_resolution: metadata.screen_resolution,
+          language: metadata.language,
+          platform: metadata.platform,
+          referrer: metadata.referrer,
         }]);
 
       if (error) throw error;
@@ -369,6 +512,8 @@ const DirectTV = () => {
       setStatus({ loading: false, error: null, success: true });
       setShowPopup(true);
     } catch (error) {
+      console.error('Error submitting form:', error); // Detailed error log
+
       // Track form submission error
       FB_PIXEL.track('Lead', {
         content_name: 'Landing Page Submission Error',
@@ -377,7 +522,7 @@ const DirectTV = () => {
       });
 
       setStatus({ loading: false, error: error.message, success: false });
-      alert('Error submitting form. Please try again.');
+      alert(`Error submitting form: ${error.message}`);
     }
   };
 
@@ -419,15 +564,15 @@ const DirectTV = () => {
           <SectionTitle>Using Our Proven System:</SectionTitle>
           <List>
             <ListItem>
-              <CheckCircle color="#10B981" />
+              <CheckCircle color="#10B981" size={24} />
               You’ll cut perceived wait times in half without adding staff.
             </ListItem>
             <ListItem>
-              <CheckCircle color="#10B981" />
+              <CheckCircle color="#10B981" size={24} />
               Patients will feel prioritized and cared for.
             </ListItem>
             <ListItem>
-              <CheckCircle color="#10B981" />
+              <CheckCircle color="#10B981" size={24} />
               Your clinic will be recognized as the leader in patient satisfaction.
             </ListItem>
           </List>
@@ -441,14 +586,14 @@ const DirectTV = () => {
         </Section>
 
         <SocialProof>
-          <SectionTitle>Clinics using NeoFlow Digital, report:</SectionTitle>
+          <SectionTitle>Clinics using NeoFlow Digital report:</SectionTitle>
           <List>
             <ListItem>
-              <CheckCircle color="#10B981" />
+              <CheckCircle color="#10B981" size={20} />
               <strong>A 50% boost in positive reviews</strong> within 30 days.
             </ListItem>
             <ListItem>
-              <CheckCircle color="#10B981" />
+              <CheckCircle color="#10B981" size={20} />
               <strong>A dramatic improvement</strong> in patient retention and referrals.
             </ListItem>
           </List>
@@ -465,7 +610,7 @@ const DirectTV = () => {
           <Clock size={24} style={{ marginBottom: '1rem' }} />
           <SectionTitle>Limited Availability</SectionTitle>
           <SectionText>
-            Only <strong>10 clinics</strong> in your area will be eligible for this solution at our discounted rate of <strong> Rs.41/day</strong>. Don’t wait—your competition won’t.
+            Only <strong>10 clinics</strong> in your area will be eligible for this solution at our discounted rate of <strong>$41/day</strong>. Don’t wait—your competition won’t.
           </SectionText>
         </UrgencyBox>
 
